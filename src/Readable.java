@@ -8,6 +8,6 @@ public class Readable extends Item{
 	@Override
 	public int getPrice(){
 		return 12;
-		//hello
+		//hellod
 	}
 }
