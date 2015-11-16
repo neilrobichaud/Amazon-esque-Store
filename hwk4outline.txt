@@ -1,0 +1,78 @@
+Page1:	
+	print 
+	1. Sign in
+	2. Sign up
+	Choose your option
+
+	if one is inputted:
+		changeCurrentPage(3)
+	if two is inputted	
+		changeCurrentPage(2)
+
+Page2: 
+	print "Choose your username"
+	uname1=inputted name
+	check users.txt for uname1
+		if found --> "This username has already been created, please choose another one"
+				 --> changeCurrentPage(2)
+		if not found -->add uname1 to users.txt
+					 -->"username added"
+					 -->changeCurrentPage(1)
+	
+Page3:
+	print "enter your username"
+	uname1=inputted name
+	check users.txt for uname1
+	if uname1 doesn't exist --> changeCurrentPage(4)		
+	if uname1 is found --> print "Hello Mr. " + uname1
+		changeCurrentPage(5)
+		
+Page4:
+	print "No Access"
+	changeCurrentPage(1)
+	
+Page5: 
+	print 
+	1.View items by category
+	2.view shopping cart
+	3.sign out
+	4.view previous orders
+	Choose your option
+	
+	p5choice=input
+	if p5choice=1 --> changeCurrentPage(6)
+	if p5choice=2 --> changeCurrentPage(7)
+	if p5choice=3 --> changeCurrentPage(1)
+	if p5choice=4 --> changeCurrentPage(11)
+	
+Page6:
+	print
+	1. Readables
+	2. Audio
+	Choose your option
+	Press -1 to return to previous menu
+	
+	p6choice=input
+	if 1 --> changeCurrentPage(8)
+	if 2 --> changeCurrentPage(9)
+	if -1 --> changeCurrentPage(5)
+
+Page7:
+	print contents of uname1_cart.txt
+	print press -1 to return to previous menu
+	if -1 --> changeCurrentPage(5)
+	
+Page8:
+	print contents of books.txt
+	print contents of ebooks.txt
+	TODO - find way to print contents of both files and assign a number to each item.
+	print choose your option
+		take inputted number, search for it in the contents of books and ebooks
+			print "how many?"
+				add number of items to uname1_cart
+				print "x items successfully added to cart"
+	
+	print press 0 to checkout or -1 to keep shopping
+	if -1 --> changeCurrentPage(6)
+	if 0 --> changeCurrentPage(10)
+	
