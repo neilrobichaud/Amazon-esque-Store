@@ -1,7 +1,10 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.*;
+import java.util.List;
+
 
 public class UserInterface {
 	private Array readables;
@@ -24,6 +27,7 @@ public class UserInterface {
 	}
 	public void getReadables(){} // fetches all readables from the files and places them in the readables array
 	public void showAudioProducts(){} //Displays all audio products for browsing.
+
 	private void page5(){	
 			System.out.println("1.View items by category");
 			System.out.println("2.view shopping cart");
@@ -89,8 +93,86 @@ public class UserInterface {
 		
 		x.close();
 	}
-	public static void main(String args[]){
+	public  void main(String args[]){
+		page1();
+	}
 		
+
+	public void page1(){	
+		Scanner a = new Scanner(System.in);
+		int p1choice;
+		System.out.println("1.Sign in");
+		System.out.println("2.Sign up");
+		System.out.print("Choose your option:");
+		s = a.nextInt();
+		if(p1choice==1){
+			changeCurrentPage(3);
+		}
+		else if(p1choice==2){
+			changeCurrentPage(2);
+		}
+	}
+	private  void page2(){
+		System.out.print("Choose your username:");
+		File file = new File("Users.txt");
+		Scanner a = new Scanner(System.in);
+		String p2choice = a.next();
+		FileWriter write;
+		if(isInFile(p2choice, "Users.txt")){
+			System.out.println("That username already exists");
+			changeCurrentPage(1);
+		}
+		else{
+			try {
+				write = new FileWriter(file, true);
+				BufferedWriter buffer = new BufferedWriter(write);
+				if (file.length() != 0){
+					buffer.newLine();
+					buffer.write(p2choice);
+				}else{
+					buffer.write(p2choice);
+				}
+				buffer.close();
+				System.out.println("Username successfully added");
+				changeCurrentPage(1);
+				}
+			catch (IOException e) {
+			e.printStackTrace();
+			}
+		}
+	}
+	private  void page3() {
+		Scanner a = new Scanner(System.in);
+		String p3choice;
+		System.out.print("Enter your username:");
+		p3choice = a.next();
+		if(isInFile(p3choice, "Users.txt")){
+			System.out.println("Hello " + p3choice);
+			changeCurrentPage(5);
+		}
+		else{
+			changeCurrentPage(4);
+		}
+	}
+	private  void page4(){
+		System.out.println("No Access");
+		changeCurrentPage(1);
+	}
+	private  boolean isInFile(String input, String infile){
+		File file = new File(infile);
+		Scanner reader = null;
+		try {
+			reader = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		List<String> list=new ArrayList<>();
+		while(reader.hasNextLine()){
+			list.add(reader.nextLine());
+		}
+		reader.close();
+		return list.contains(input);
+
 	}
 	
 }
