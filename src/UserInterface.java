@@ -1,10 +1,6 @@
 import java.io.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
+import java.util.*;
 
 public class UserInterface {
 	public  void main(String args[]){
@@ -21,9 +17,9 @@ public class UserInterface {
 		if (nextPage == 2){page2();}
 		if (nextPage == 3){page3();}
 		if (nextPage == 4){page4();}
-//		if (nextPage == 5){page5();}
-//		if (nextPage == 6){page6();}
-//		if (nextPage == 7){page7();}
+		if (nextPage == 5){page5();}
+		if (nextPage == 6){page6();}
+		if (nextPage == 7){page7();}
 //		if (nextPage == 8){page8();}
 //		if (nextPage == 9){page9();}
 //		if (nextPage == 10){page10();}
@@ -118,7 +114,7 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private void page5(){	
+	private  void page5(){	
 		System.out.println("1.View items by category");
 		System.out.println("2.view shopping cart");
 		System.out.println("3.sign out");
@@ -139,7 +135,7 @@ public class UserInterface {
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	private void page6(){			
+	private  void page6(){			
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -158,7 +154,7 @@ public class UserInterface {
 		
 		x.close();
 		}
-	private void page7(){
+	private  void page7(){
 		//TODO print contents of uname1_cart.txt
 		String uname1="ddd";
 		FileReader in = null;
