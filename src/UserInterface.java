@@ -13,4 +13,10 @@ public class UserInterface {
 	}
 	public void getReadables(){} // fetches all readables from the files and places them in the readables array
 	public void showAudioProducts(){} //Displays all audio products for browsing.
+	public void page1(){	
+		 
+		System.out.println("1. Sign in");
+		System.out.println("2. Sign up");
+		System.out.println("Choose your option");
+	}
 }	
