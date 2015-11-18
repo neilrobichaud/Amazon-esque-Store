@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class UserInterface {
-	public  void main(String args[]){
+	public static void main(String args[]){
 		page1();
 	}
 	private Array readables;
@@ -12,14 +12,14 @@ public class UserInterface {
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
 	}
-	public  int changeCurrentPage(int nextPage){//This method is for page navigation. It should change to current page and show the content.
+	public static int changeCurrentPage(int nextPage){//This method is for page navigation. It should change to current page and show the content.
 		if (nextPage == 1){page1();}
 		if (nextPage == 2){page2();}
 		if (nextPage == 3){page3();}
 		if (nextPage == 4){page4();}
 		if (nextPage == 5){page5();}
 		if (nextPage == 6){page6();}
-		if (nextPage == 7){page7();}
+//		if (nextPage == 7){page7();}
 //		if (nextPage == 8){page8();}
 //		if (nextPage == 9){page9();}
 //		if (nextPage == 10){page10();}
@@ -29,7 +29,7 @@ public class UserInterface {
 	public void showAudioProducts(){} //Displays all audio products for browsing.
 	
 	
-	public  void page1(){	
+	public static  void page1(){	
 		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
 			users.createNewFile(); books.createNewFile(); ebooks.createNewFile(); mp3.createNewFile(); cds.createNewFile();
@@ -39,19 +39,20 @@ public class UserInterface {
 		} 
 
 		Scanner a = new Scanner(System.in);
-		int p1choice;
+		String p1choice;
 		System.out.println("1.Sign in");
 		System.out.println("2.Sign up");
 		System.out.print("Choose your option:");
-		p1choice = a.nextInt();
-		if(p1choice==1){
+		p1choice = a.next();
+		if(p1choice.equals("1")){
 			changeCurrentPage(3);
 		}
-		else if(p1choice==2){
+		else if(p1choice.equals("2")){
 			changeCurrentPage(2);
 		}
+		a.close();
 	}
-	private  void page2(){
+	private static void page2(){
 		System.out.print("Choose your username:");					//prints to screen
 		File file = new File("Users.txt");							//get file
 		Scanner a = new Scanner(System.in);							//take input
@@ -81,7 +82,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private  void page3() {								//page 3
+	private static void page3() {								//page 3
 		Scanner a = new Scanner(System.in);				//create input scanner
 		String p3choice;
 		System.out.print("Enter your username:");		//prints to screen
@@ -95,11 +96,11 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private  void page4(){						//page 4 pretty self explanitory
+	private static void page4(){						//page 4 pretty self explanitory
 		System.out.println("No Access");
 		changeCurrentPage(1);					//to page 1
 	}
-	private  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
+	private static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
 		File file = new File(infile);
 		Scanner reader = null;
 		try {
@@ -114,7 +115,7 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private  void page5(){	
+	private static void page5(){	
 		System.out.println("1.View items by category");
 		System.out.println("2.view shopping cart");
 		System.out.println("3.sign out");
@@ -124,18 +125,18 @@ public class UserInterface {
 		
 		Scanner x = new Scanner(System.in);			//scanner
 		String p5choice = x.next();
-		if (p5choice == "1") 
+		if (p5choice.equals("1"))
 			changeCurrentPage(6);
-		else if (p5choice == "2") 
+		else if (p5choice.equals("2")) 
 			changeCurrentPage(7);
-		else if (p5choice == "3") 
+		else if (p5choice.equals("3"))
 			changeCurrentPage(1);
-		else if (p5choice == "4")
+		else if (p5choice.equals("4"))
 			changeCurrentPage(11);
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	private  void page6(){			
+	private static void page6(){			
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -144,40 +145,40 @@ public class UserInterface {
 		Scanner x = new Scanner(System.in);			//scanner
 		String p6choice = x.next();		
 					
-		if (p6choice == "1")
+		if (p6choice.equals("1"))
 			changeCurrentPage(8);
-		else if (p6choice == "2") 
+		else if (p6choice.equals("2")) 
 			changeCurrentPage(9);
-		else if (p6choice == "-1") 
+		else if (p6choice.equals("-1"))
 			changeCurrentPage(5);
 		else System.out.println("Please enter a valid input");
 		
 		x.close();
 		}
-	private  void page7(){
-		//TODO print contents of uname1_cart.txt
-		String uname1="ddd";
-		FileReader in = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(uname1))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		       // process the line.
-		    }
-		}
-		finally{
-			if (in !=null){
-				in.close();
-			}
-		}
-		
-		System.out.println("Press -1 to return to previous menu");
-		Scanner x = new Scanner(System.in);			//scanner
-		String p7choice = x.next();	
-		
-		if (p7choice == "-1")
-			changeCurrentPage(5);
-		else System.out.println("Please enter a valid input");
-		
-		x.close();
-	}
+//	private  void page7(){
+//		//TODO print contents of uname1_cart.txt
+//		String uname1="ddd";
+//		FileReader in = null;
+//		try (BufferedReader br = new BufferedReader(new FileReader(uname1))) {
+//		    String line;
+//		    while ((line = br.readLine()) != null) {
+//		       // process the line.
+//		    }
+//		}
+//		finally{
+//			if (in !=null){
+//				in.close();
+//			}
+//		}
+//		
+//		System.out.println("Press -1 to return to previous menu");
+//		Scanner x = new Scanner(System.in);			//scanner
+//		String p7choice = x.next();	
+//		
+//		if (p7choice == "-1")
+//			changeCurrentPage(5);
+//		else System.out.println("Please enter a valid input");
+//		
+//		x.close();
+//	}
 }	
