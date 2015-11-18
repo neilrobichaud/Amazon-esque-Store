@@ -82,7 +82,7 @@ public class UserInterface {
 				in.close();
 			}
 		}
-		
+		//TODO seans mom
 		System.out.println("Press -1 to return to previous menu");
 		Scanner x = new Scanner(System.in);			//scanner
 		String p7choice = x.next();	
@@ -140,6 +140,7 @@ public class UserInterface {
 			e.printStackTrace();
 			}
 		}
+		a.close();
 	}
 	private  void page3() {
 		Scanner a = new Scanner(System.in);
@@ -153,6 +154,7 @@ public class UserInterface {
 		else{
 			changeCurrentPage(4);
 		}
+		a.close();
 	}
 	private  void page4(){
 		System.out.println("No Access");
