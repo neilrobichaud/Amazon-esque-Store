@@ -50,6 +50,10 @@ public class UserInterface {
 		else if(p1choice.equals("2")){
 			changeCurrentPage(2);
 		}
+		else{
+			System.out.println("Please enter a valid input");
+			changeCurrentPage(1);
+		}
 		a.close();
 	}
 	private static void page2(){
@@ -115,11 +119,12 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private static void page5(){	
+	private static void page5(){
+		System.out.println("\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n");
 		System.out.println("1.View items by category");
-		System.out.println("2.view shopping cart");
-		System.out.println("3.sign out");
-		System.out.println("4.view previous orders");
+		System.out.println("2.View shopping cart");
+		System.out.println("3.Sign out");
+		System.out.println("4.View previous orders");
 		System.out.println("Choose your option");			
 		
 		
@@ -151,8 +156,9 @@ public class UserInterface {
 			changeCurrentPage(9);
 		else if (p6choice.equals("-1"))
 			changeCurrentPage(5);
-		else System.out.println("Please enter a valid input");
-		
+		else {
+			System.out.println("Please enter a valid input");
+			changeCurrentPage(6);}
 		x.close();
 		}
 //	private  void page7(){
