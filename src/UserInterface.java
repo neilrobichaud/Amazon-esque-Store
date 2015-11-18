@@ -1,6 +1,8 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -119,5 +121,69 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	
+	private void page5(){	
+		System.out.println("1.View items by category");
+		System.out.println("2.view shopping cart");
+		System.out.println("3.sign out");
+		System.out.println("4.view previous orders");
+		System.out.println("Choose your option");			
+		
+		
+		Scanner x = new Scanner(System.in);			//scanner
+		String p5choice = x.next();
+		if (p5choice == "1") 
+			changeCurrentPage(6);
+		else if (p5choice == "2") 
+			changeCurrentPage(7);
+		else if (p5choice == "3") 
+			changeCurrentPage(1);
+		else if (p5choice == "4")
+			changeCurrentPage(11);
+		else System.out.println("Please enter a valid input");
+		x.close();
+	}
+	private void page6(){			
+		System.out.println("1. Readables");
+		System.out.println("2. Audio");
+		System.out.println("Choose your option");
+		System.out.println("Press -1 to return to previous menu");
+		
+		Scanner x = new Scanner(System.in);			//scanner
+		String p6choice = x.next();		
+					
+		if (p6choice == "1")
+			changeCurrentPage(8);
+		else if (p6choice == "2") 
+			changeCurrentPage(9);
+		else if (p6choice == "-1") 
+			changeCurrentPage(5);
+		else System.out.println("Please enter a valid input");
+		
+		x.close();
+		}
+	private void page7(){
+		//TODO print contents of uname1_cart.txt
+		FileReader in = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       // process the line.
+		    }
+		}
+		finally{
+			if (in !=null){
+				in.close();
+			}
+		}
+		
+		System.out.println("Press -1 to return to previous menu");
+		Scanner x = new Scanner(System.in);			//scanner
+		String p7choice = x.next();	
+		
+		if (p7choice == "-1")
+			changeCurrentPage(5);
+		else System.out.println("Please enter a valid input");
+		
+		x.close();
+	}
 }	

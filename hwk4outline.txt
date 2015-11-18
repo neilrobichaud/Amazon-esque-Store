@@ -1,4 +1,10 @@
-Page1:	
+Page1:
+	check and create users.txt //if any exist then dont overwrite.
+	check and create CDs.txt
+	check and create MP3.txt
+	check and create Ebooks.txt
+	check and create Books.txt
+	
 	print 
 	1. Sign in
 	2. Sign up
@@ -25,7 +31,11 @@ Page3:
 	check users.txt for uname1
 	if uname1 doesn't exist --> changeCurrentPage(4)		
 	if uname1 is found --> print "Hello Mr. " + uname1
+		search for uname1_cart.txt
+			if not found --> create uname1_cart.txt
+			if found --> nothing
 		changeCurrentPage(5)
+		
 		
 Page4:
 	print "No Access"
@@ -75,4 +85,7 @@ Page8:
 	print press 0 to checkout or -1 to keep shopping
 	if -1 --> changeCurrentPage(6)
 	if 0 --> changeCurrentPage(10)
+	
+Page9: 
+	
 	
