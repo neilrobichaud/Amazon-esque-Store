@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.*;
 
 public class UserInterface {
 	private Array readables;
@@ -63,5 +64,36 @@ public class UserInterface {
 			
 			x.close();
 	}
+	private void page7(){
+		//TODO print contents of uname1_cart.txt
+		FileReader in = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       // process the line.
+		    }
+		}
+		finally{
+			if (in !=null){
+				in.close();
+			}
+		}
+		
+		System.out.println("Press -1 to return to previous menu");
+		Scanner x = new Scanner(System.in);			//scanner
+		String p7choice = x.next();	
+		
+		if (p7choice == "-1")
+			changeCurrentPage(5);
+		else System.out.println("Please enter a valid input");
+		
+		x.close();
+	}
+	public static void main(String args[]){
+		
+	}
 	
-}	
+}
+
+	
+
