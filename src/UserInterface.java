@@ -84,7 +84,8 @@ public class UserInterface {
 				}
 				buffer.close();										//close buffered writer
 				System.out.println("Username successfully added");	//print to screen
-				File cartfile = new File(p2choice + "_cart.txt");							//get file
+				PrintWriter writer = new PrintWriter(p2choice+"_cart.txt", "UTF-8");							//get file
+				writer.close();
 				changeCurrentPage(1);								//to page 1
 				}
 			catch (IOException e) {
@@ -128,7 +129,7 @@ public class UserInterface {
 		return list.contains(input);
 	}
 	public static void page5() throws FileNotFoundException, IOException{
-		System.out.println("\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n");
+		System.out.println("\n"+ "\n");
 		System.out.println("1.View items by category");
 		System.out.println("2.View shopping cart");
 		System.out.println("3.Sign out");
@@ -172,7 +173,6 @@ public class UserInterface {
 	
 	public static void page7() throws FileNotFoundException, IOException{
 		//TODO print contents of uname1_cart.txt
-		System.out.print("hello");
 		ArrayList<String> content = ShoppingCart.getContent();
 		if (content.size() > 0){
 			for(int i = 0; i < content.size(); i++) {   
@@ -186,7 +186,7 @@ public class UserInterface {
 		Scanner x = new Scanner(System.in);			//scanner
 		String p7choice = x.next();	
 		
-		if (p7choice == "-1")
+		if (p7choice.equals("-1"))
 			changeCurrentPage(5);
 		else System.out.println("Please enter a valid input");
 		
