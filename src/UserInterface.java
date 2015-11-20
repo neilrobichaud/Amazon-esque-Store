@@ -3,12 +3,16 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class UserInterface {
+	
 	public static void main(String args[]){
+		String uname1;
 		page1();
+		
 	}
-	private Array readables;
-	private Array audioProducts;
-	private int currentPage; // the page number (p1..p10)
+	public static String username;
+	public Array readables;
+	public Array audioProducts;
+	public int currentPage; // the page number (p1..p10)
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
 	}
@@ -56,7 +60,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page2(){
+	public static void page2(){
 		System.out.print("Choose your username:");					//prints to screen
 		File file = new File("Users.txt");							//get file
 		Scanner a = new Scanner(System.in);							//take input
@@ -86,13 +90,14 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page3() {								//page 3
+	public static void page3() {								//page 3
 		Scanner a = new Scanner(System.in);				//create input scanner
 		String p3choice;
 		System.out.print("Enter your username:");		//prints to screen
 		p3choice = a.next();
 		if(isInFile(p3choice, "Users.txt")){			//check if the username is in the file
 			System.out.println("Hello " + p3choice);	//prints to screen
+			username=p3choice;
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file
@@ -100,11 +105,11 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page4(){						//page 4 pretty self explanitory
+	public static void page4(){						//page 4 pretty self explanitory
 		System.out.println("No Access");
 		changeCurrentPage(1);					//to page 1
 	}
-	private static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
+	public static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
 		File file = new File(infile);
 		Scanner reader = null;
 		try {
@@ -119,7 +124,7 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private static void page5(){
+	public static void page5(){
 		System.out.println("\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n");
 		System.out.println("1.View items by category");
 		System.out.println("2.View shopping cart");
@@ -141,7 +146,7 @@ public class UserInterface {
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	private static void page6(){			
+	public static void page6(){			
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -161,30 +166,25 @@ public class UserInterface {
 			changeCurrentPage(6);}
 		x.close();
 		}
-//	private  void page7(){
-//		//TODO print contents of uname1_cart.txt
-//		String uname1="ddd";
-//		FileReader in = null;
-//		try (BufferedReader br = new BufferedReader(new FileReader(uname1))) {
-//		    String line;
-//		    while ((line = br.readLine()) != null) {
-//		       // process the line.
-//		    }
-//		}
-//		finally{
-//			if (in !=null){
-//				in.close();
-//			}
-//		}
-//		
-//		System.out.println("Press -1 to return to previous menu");
-//		Scanner x = new Scanner(System.in);			//scanner
-//		String p7choice = x.next();	
-//		
-//		if (p7choice == "-1")
-//			changeCurrentPage(5);
-//		else System.out.println("Please enter a valid input");
-//		
-//		x.close();
-//	}
+	public static void page7() throws FileNotFoundException, IOException{
+		//TODO print contents of uname1_cart.txt
+		String cartname = username + ".txt";
+		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       // process the line.
+		    }
+		    
+		}
+		
+		System.out.println("Press -1 to return to previous menu");
+		Scanner x = new Scanner(System.in);			//scanner
+		String p7choice = x.next();	
+		
+		if (p7choice == "-1")
+			changeCurrentPage(5);
+		else System.out.println("Please enter a valid input");
+		
+		x.close();
+	}
 }	
