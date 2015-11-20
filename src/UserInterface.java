@@ -3,33 +3,38 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class UserInterface {
-	public static void main(String args[]){
+	
+	public static void main(String args[]) throws FileNotFoundException, IOException{
+		
 		page1();
+		
 	}
-	private Array readables;
-	private Array audioProducts;
-	private int currentPage; // the page number (p1..p10)
+	public Array readables;
+	public Array audioProducts;
+	public static int currentPage; // the page number (p1..p10)
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
 	}
-	public static int changeCurrentPage(int nextPage){//This method is for page navigation. It should change to current page and show the content.
-		if (nextPage == 1){page1();}
-		if (nextPage == 2){page2();}
-		if (nextPage == 3){page3();}
-		if (nextPage == 4){page4();}
-		if (nextPage == 5){page5();}
-		if (nextPage == 6){page6();}
-//		if (nextPage == 7){page7();}
-//		if (nextPage == 8){page8();}
-//		if (nextPage == 9){page9();}
-//		if (nextPage == 10){page10();}
+	public static int changeCurrentPage(int nextPage) throws FileNotFoundException, IOException{//This method is for page navigation. It should change to current page and show the content.
+		if (nextPage == 1){currentPage=nextPage;page1();}
+		if (nextPage == 2){currentPage=nextPage;page2();}
+		if (nextPage == 3){currentPage=nextPage;page3();}
+		if (nextPage == 4){currentPage=nextPage;page4();}
+		if (nextPage == 5){currentPage=nextPage;page5();}
+		if (nextPage == 6){currentPage=nextPage;page6();}
+		if (nextPage == 7){currentPage=nextPage;page7();}
+//		if (nextPage == 8){currentPage=nextPage;page8();}
+//		if (nextPage == 9){currentPage=nextPage;page9();}
+//		if (nextPage == 10){currentPage=nextPage;page10();}
 		return nextPage;
 	}
 	public void getReadables(){} // fetches all readables from the files and places them in the readables array
+	public void getAudioProducts(){} // fetches all readables from the files and places them in the readables array
+	public void showReadables(){} //Displays all audio products for browsing.
 	public void showAudioProducts(){} //Displays all audio products for browsing.
 	
 	
-	public static  void page1(){	
+	public static  void page1() throws FileNotFoundException, IOException{	
 		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
 			users.createNewFile(); books.createNewFile(); ebooks.createNewFile(); mp3.createNewFile(); cds.createNewFile();
@@ -56,7 +61,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page2(){
+	public static void page2() throws FileNotFoundException, IOException{
 		System.out.print("Choose your username:");					//prints to screen
 		File file = new File("Users.txt");							//get file
 		Scanner a = new Scanner(System.in);							//take input
@@ -78,6 +83,8 @@ public class UserInterface {
 				}
 				buffer.close();										//close buffered writer
 				System.out.println("Username successfully added");	//print to screen
+				PrintWriter writer = new PrintWriter(p2choice+"_cart.txt", "UTF-8");							//get file
+				writer.close();
 				changeCurrentPage(1);								//to page 1
 				}
 			catch (IOException e) {
@@ -86,13 +93,14 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page3() {								//page 3
+	public static void page3() throws FileNotFoundException, IOException {								//page 3
 		Scanner a = new Scanner(System.in);				//create input scanner
 		String p3choice;
 		System.out.print("Enter your username:");		//prints to screen
 		p3choice = a.next();
 		if(isInFile(p3choice, "Users.txt")){			//check if the username is in the file
 			System.out.println("Hello " + p3choice);	//prints to screen
+			User.username=p3choice;
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file
@@ -100,11 +108,11 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	private static void page4(){						//page 4 pretty self explanitory
+	public static void page4() throws FileNotFoundException, IOException{						//page 4 pretty self explanitory
 		System.out.println("No Access");
 		changeCurrentPage(1);					//to page 1
 	}
-	private static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
+	public static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
 		File file = new File(infile);
 		Scanner reader = null;
 		try {
@@ -119,8 +127,8 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private static void page5(){
-		System.out.println("\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n");
+	public static void page5() throws FileNotFoundException, IOException{
+		System.out.println("\n"+ "\n");
 		System.out.println("1.View items by category");
 		System.out.println("2.View shopping cart");
 		System.out.println("3.Sign out");
@@ -141,7 +149,7 @@ public class UserInterface {
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	private static void page6(){			
+	public static void page6() throws FileNotFoundException, IOException{			
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -161,30 +169,26 @@ public class UserInterface {
 			changeCurrentPage(6);}
 		x.close();
 		}
-//	private  void page7(){
-//		//TODO print contents of uname1_cart.txt
-//		String uname1="ddd";
-//		FileReader in = null;
-//		try (BufferedReader br = new BufferedReader(new FileReader(uname1))) {
-//		    String line;
-//		    while ((line = br.readLine()) != null) {
-//		       // process the line.
-//		    }
-//		}
-//		finally{
-//			if (in !=null){
-//				in.close();
-//			}
-//		}
-//		
-//		System.out.println("Press -1 to return to previous menu");
-//		Scanner x = new Scanner(System.in);			//scanner
-//		String p7choice = x.next();	
-//		
-//		if (p7choice == "-1")
-//			changeCurrentPage(5);
-//		else System.out.println("Please enter a valid input");
-//		
-//		x.close();
-//	}
+	
+	public static void page7() throws FileNotFoundException, IOException{
+		//TODO print contents of uname1_cart.txt
+		ArrayList<String> content = ShoppingCart.getContent();
+		if (content.size() > 0){
+			for(int i = 0; i < content.size(); i++) {   
+			    System.out.println(content.get(i));
+			} 
+		}
+		else
+			System.out.println("There appears to be nothing here, maybe you should buy something you cheap fuck!");
+		
+		System.out.println("Press -1 to return to previous menu");
+		Scanner x = new Scanner(System.in);			//scanner
+		String p7choice = x.next();	
+		
+		if (p7choice.equals("-1"))
+			changeCurrentPage(5);
+		else System.out.println("Please enter a valid input");
+		
+		x.close();
+	}
 }	
