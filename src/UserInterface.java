@@ -28,7 +28,8 @@ public class UserInterface {
 	}
 	public void getReadables(){} // fetches all readables from the files and places them in the readables array
 	public void showAudioProducts(){} //Displays all audio products for browsing.
-	public static void page1(){	
+	
+	public static  void page1(){	
 		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
 			users.createNewFile(); books.createNewFile(); ebooks.createNewFile(); mp3.createNewFile(); cds.createNewFile();
@@ -52,8 +53,10 @@ public class UserInterface {
 			System.out.println("Please enter a valid input");
 			changeCurrentPage(1);
 		}
+		a.close();
 	}
 	private static void page2(){
+		System.out.println();
 		System.out.print("Choose your username:");					//prints to screen
 		File file = new File("Users.txt");							//get file
 		Scanner a = new Scanner(System.in);							//take input
@@ -81,8 +84,10 @@ public class UserInterface {
 			e.printStackTrace();
 			}
 		}
+		a.close();
 	}
 	private static void page3() {								//page 3
+		System.out.println();
 		Scanner a = new Scanner(System.in);				//create input scanner
 		String p3choice;
 		System.out.print("Enter your username:");		//prints to screen
@@ -94,12 +99,15 @@ public class UserInterface {
 		else{											//if not in file
 			changeCurrentPage(4);						//to page 4
 		}
+		a.close();
 	}
 	private static void page4(){						//page 4 pretty self explanitory
+		System.out.println();
 		System.out.println("No Access");
-		changeCurrentPage(1);					//to page 1
+		changeCurrentPage(1);							//to page 1
 	}
-	private static boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
+
+	private static  boolean isInFile(String input, String infile){//subject to change, useful for checking if a string is in a file
 		File file = new File(infile);
 		Scanner reader = null;
 		try {
@@ -114,28 +122,29 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	private static void page5(){	
+	private static void page5(){
+		System.out.println();
 		System.out.println("1.View items by category");
-		System.out.println("2.view shopping cart");
-		System.out.println("3.sign out");
-		System.out.println("4.view previous orders");
-		System.out.println("Choose your option");			
-		
-		
+		System.out.println("2.View shopping cart");
+		System.out.println("3.Sign out");
+		System.out.println("4.View previous orders");
+		System.out.print("Choose your option:");			
 		Scanner x = new Scanner(System.in);			//scanner
 		String p5choice = x.next();
-		if (p5choice == "1") 
+		if (p5choice.equals("1"))
 			changeCurrentPage(6);
-		else if (p5choice == "2") 
+		else if (p5choice.equals("2")) 
 			changeCurrentPage(7);
-		else if (p5choice == "3") 
-			changeCurrentPage(1);
-		else if (p5choice == "4")
+		else if (p5choice.equals("3")){
+			System.out.println();
+			changeCurrentPage(1);}
+		else if (p5choice.equals("4"))
 			changeCurrentPage(11);
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	private static void page6(){			
+	private static void page6(){
+		System.out.println();
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -144,20 +153,30 @@ public class UserInterface {
 		Scanner x = new Scanner(System.in);			//scanner
 		String p6choice = x.next();		
 					
-		if (p6choice == "1")
+		if (p6choice.equals("1"))
 			changeCurrentPage(8);
-		else if (p6choice == "2") 
+		else if (p6choice.equals("2")) 
 			changeCurrentPage(9);
-		else if (p6choice == "-1") 
+		else if (p6choice.equals("-1"))
 			changeCurrentPage(5);
-		else System.out.println("Please enter a valid input");
-		
+		else {
+			System.out.println("Please enter a valid input");
+			changeCurrentPage(6);}
 		x.close();
-		}
+	}
+	private static void page8(){
+		
+	}
+}
 //	private static void page7(){
 //		//TODO print contents of uname1_cart.txt
 //		FileReader in = null;
 //		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+//	private  void page7(){
+//		//TODO print contents of uname1_cart.txt
+//		String uname1="ddd";
+//		FileReader in = null;
+//		try (BufferedReader br = new BufferedReader(new FileReader(uname1))) {
 //		    String line;
 //		    while ((line = br.readLine()) != null) {
 //		       // process the line.
@@ -179,4 +198,4 @@ public class UserInterface {
 //		
 //		x.close();
 //	}
-}	
+	
