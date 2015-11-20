@@ -12,24 +12,26 @@ public class UserInterface {
 	public static String username;
 	public Array readables;
 	public Array audioProducts;
-	public int currentPage; // the page number (p1..p10)
+	public static int currentPage; // the page number (p1..p10)
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
 	}
 	public static int changeCurrentPage(int nextPage){//This method is for page navigation. It should change to current page and show the content.
-		if (nextPage == 1){page1();}
-		if (nextPage == 2){page2();}
-		if (nextPage == 3){page3();}
-		if (nextPage == 4){page4();}
-		if (nextPage == 5){page5();}
-		if (nextPage == 6){page6();}
-//		if (nextPage == 7){page7();}
-//		if (nextPage == 8){page8();}
-//		if (nextPage == 9){page9();}
-//		if (nextPage == 10){page10();}
+		if (nextPage == 1){currentPage=nextPage;page1();}
+		if (nextPage == 2){currentPage=nextPage;page2();}
+		if (nextPage == 3){currentPage=nextPage;page3();}
+		if (nextPage == 4){currentPage=nextPage;page4();}
+		if (nextPage == 5){currentPage=nextPage;page5();}
+		if (nextPage == 6){currentPage=nextPage;page6();}
+//		if (nextPage == 7){currentPage=nextPage;page7();}
+//		if (nextPage == 8){currentPage=nextPage;page8();}
+//		if (nextPage == 9){currentPage=nextPage;page9();}
+//		if (nextPage == 10){currentPage=nextPage;page10();}
 		return nextPage;
 	}
 	public void getReadables(){} // fetches all readables from the files and places them in the readables array
+	public void getAudioProducts(){} // fetches all readables from the files and places them in the readables array
+	public void showReadables(){} //Displays all audio products for browsing.
 	public void showAudioProducts(){} //Displays all audio products for browsing.
 	
 	
@@ -166,16 +168,12 @@ public class UserInterface {
 			changeCurrentPage(6);}
 		x.close();
 		}
+	
 	public static void page7() throws FileNotFoundException, IOException{
 		//TODO print contents of uname1_cart.txt
-		String cartname = username + ".txt";
-		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		       // process the line.
-		    }
-		    
-		}
+		ArrayList<String> content = ShoppingCart.getContent();
+
+
 		
 		System.out.println("Press -1 to return to previous menu");
 		Scanner x = new Scanner(System.in);			//scanner
