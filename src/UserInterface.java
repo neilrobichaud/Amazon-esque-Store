@@ -35,7 +35,7 @@ public class UserInterface {
 	
 	
 	public static  void page1() throws FileNotFoundException, IOException{	
-		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
+		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks.txt");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
 			users.createNewFile(); books.createNewFile(); ebooks.createNewFile(); mp3.createNewFile(); cds.createNewFile();
 		} catch (IOException e) {
@@ -100,7 +100,7 @@ public class UserInterface {
 		p3choice = a.next();
 		if(isInFile(p3choice, "Users.txt")){			//check if the username is in the file
 			System.out.println("Hello " + p3choice);	//prints to screen
-			User.username=p3choice;
+			User myUser = new User(p3choice);
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file

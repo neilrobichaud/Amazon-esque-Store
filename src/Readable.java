@@ -2,7 +2,7 @@
 public class Readable extends Item{
 	protected String authorName;
 	public String getInfo(){
-		return "yeya";
+		return Integer.toString(sNo);
 	}
 	
 	@Override
@@ -10,4 +10,6 @@ public class Readable extends Item{
 		return 12;
 	
 	}
+	protected int price;
+	protected int sNo;
 }
