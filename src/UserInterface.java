@@ -9,7 +9,6 @@ public class UserInterface {
 		page1();
 		
 	}
-	public static String username;
 	public Array readables;
 	public Array audioProducts;
 	public static int currentPage; // the page number (p1..p10)
@@ -101,7 +100,7 @@ public class UserInterface {
 		p3choice = a.next();
 		if(isInFile(p3choice, "Users.txt")){			//check if the username is in the file
 			System.out.println("Hello " + p3choice);	//prints to screen
-			username=p3choice;
+			User.username=p3choice;
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file
