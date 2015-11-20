@@ -4,8 +4,8 @@ import java.util.*;
 
 public class UserInterface {
 	
-	public static void main(String args[]){
-		String uname1;
+	public static void main(String args[]) throws FileNotFoundException, IOException{
+		
 		page1();
 		
 	}
@@ -16,14 +16,14 @@ public class UserInterface {
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
 	}
-	public static int changeCurrentPage(int nextPage){//This method is for page navigation. It should change to current page and show the content.
+	public static int changeCurrentPage(int nextPage) throws FileNotFoundException, IOException{//This method is for page navigation. It should change to current page and show the content.
 		if (nextPage == 1){currentPage=nextPage;page1();}
 		if (nextPage == 2){currentPage=nextPage;page2();}
 		if (nextPage == 3){currentPage=nextPage;page3();}
 		if (nextPage == 4){currentPage=nextPage;page4();}
 		if (nextPage == 5){currentPage=nextPage;page5();}
 		if (nextPage == 6){currentPage=nextPage;page6();}
-//		if (nextPage == 7){currentPage=nextPage;page7();}
+		if (nextPage == 7){currentPage=nextPage;page7();}
 //		if (nextPage == 8){currentPage=nextPage;page8();}
 //		if (nextPage == 9){currentPage=nextPage;page9();}
 //		if (nextPage == 10){currentPage=nextPage;page10();}
@@ -35,7 +35,7 @@ public class UserInterface {
 	public void showAudioProducts(){} //Displays all audio products for browsing.
 	
 	
-	public static  void page1(){	
+	public static  void page1() throws FileNotFoundException, IOException{	
 		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
 			users.createNewFile(); books.createNewFile(); ebooks.createNewFile(); mp3.createNewFile(); cds.createNewFile();
@@ -62,7 +62,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	public static void page2(){
+	public static void page2() throws FileNotFoundException, IOException{
 		System.out.print("Choose your username:");					//prints to screen
 		File file = new File("Users.txt");							//get file
 		Scanner a = new Scanner(System.in);							//take input
@@ -84,6 +84,7 @@ public class UserInterface {
 				}
 				buffer.close();										//close buffered writer
 				System.out.println("Username successfully added");	//print to screen
+				File cartfile = new File(p2choice + "_cart.txt");							//get file
 				changeCurrentPage(1);								//to page 1
 				}
 			catch (IOException e) {
@@ -92,7 +93,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	public static void page3() {								//page 3
+	public static void page3() throws FileNotFoundException, IOException {								//page 3
 		Scanner a = new Scanner(System.in);				//create input scanner
 		String p3choice;
 		System.out.print("Enter your username:");		//prints to screen
@@ -107,7 +108,7 @@ public class UserInterface {
 		}
 		a.close();
 	}
-	public static void page4(){						//page 4 pretty self explanitory
+	public static void page4() throws FileNotFoundException, IOException{						//page 4 pretty self explanitory
 		System.out.println("No Access");
 		changeCurrentPage(1);					//to page 1
 	}
@@ -126,7 +127,7 @@ public class UserInterface {
 		reader.close();
 		return list.contains(input);
 	}
-	public static void page5(){
+	public static void page5() throws FileNotFoundException, IOException{
 		System.out.println("\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n"+ "\n");
 		System.out.println("1.View items by category");
 		System.out.println("2.View shopping cart");
@@ -148,7 +149,7 @@ public class UserInterface {
 		else System.out.println("Please enter a valid input");
 		x.close();
 	}
-	public static void page6(){			
+	public static void page6() throws FileNotFoundException, IOException{			
 		System.out.println("1. Readables");
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
@@ -171,9 +172,15 @@ public class UserInterface {
 	
 	public static void page7() throws FileNotFoundException, IOException{
 		//TODO print contents of uname1_cart.txt
+		System.out.print("hello");
 		ArrayList<String> content = ShoppingCart.getContent();
-
-
+		if (content.size() > 0){
+			for(int i = 0; i < content.size(); i++) {   
+			    System.out.println(content.get(i));
+			} 
+		}
+		else
+			System.out.println("There appears to be nothing here, maybe you should buy something you cheap fuck!");
 		
 		System.out.println("Press -1 to return to previous menu");
 		Scanner x = new Scanner(System.in);			//scanner
