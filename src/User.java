@@ -1,8 +1,10 @@
 
 public class User{
-	public static String username;	
-	public String getUsername(){
+	private static String username;	
+	public static String getUsername(){
 		return username;
 	} 
-		
+	public User(String name){
+		username=name;
+	}
 }

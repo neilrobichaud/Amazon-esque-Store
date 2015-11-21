@@ -1,10 +1,22 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ShoppingCart extends User{
-	static ArrayList<String> content = new ArrayList<String>(); //array of items
-	static String cartname = User.username + "_cart.txt";
+	public ShoppingCart(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+	private static ArrayList<String> content = new ArrayList<String>(); //array of items
+	static String cartname = getUsername() + "_cart.txt";
 	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.		
 		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
 		    String line;
@@ -15,7 +27,10 @@ public class ShoppingCart extends User{
 		}
 		return content;
 	}
-	public void addItem(int serialNo, int quantity) throws FileNotFoundException, IOException{
+	public void addItem(Item itemname, int quantity) throws FileNotFoundException, IOException{
+		//String info = itemname.getInfo();
+		//String[] infoList=info.split(",");
+		int serialNo= Integer.parseInt(itemname.getInfo()); //Integer.parseInt(infoList[0]);
 		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
 		    String line;
 		    String updatedline="";
@@ -49,15 +64,20 @@ public class ShoppingCart extends User{
 		    
 		    if (found == false){
 		    	Writer output = new BufferedWriter(new FileWriter(cartname, true));
-		    	//output.append("\n"+Item.getInfo(serialNo));//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
 		    	
+		    	// Display a date in day, month, year format
+		    	Date date = Calendar.getInstance().getTime();		    	
+		    	DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    	String today = formatter.format(date);
+		    	
+		    	output.append("\n"+serialNo+","+itemname.toString()+","+today+","+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
+		    	//sn,name,date,quantity
+		    	output.close();
 		    }
-		    	
+		    
 		}
 
 		//search username_cart.txt for matching serial number
 		//if found add quantity, if not create new line with the item
 	}
-	
-
 }
