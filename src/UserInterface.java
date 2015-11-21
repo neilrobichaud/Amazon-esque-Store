@@ -101,7 +101,7 @@ public class UserInterface {
 		p3choice = a.next();
 		if(isInFile(p3choice, "Users.txt")){			//check if the username is in the file
 			System.out.println("Hello " + p3choice);	//prints to screen
-			User.username=p3choice;
+			User myUser = new User(p3choice);
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file
