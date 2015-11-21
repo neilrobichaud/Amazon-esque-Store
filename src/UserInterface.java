@@ -147,7 +147,9 @@ public class UserInterface {
 			changeCurrentPage(1);}
 		else if (p5choice.equals("4"))
 			changeCurrentPage(11);
-		else System.out.println("Please enter a valid input");
+		else {
+			System.out.println("Please enter a valid input");
+			changeCurrentPage(5);}
 		x.close();
 	}
 	public static void page6() throws FileNotFoundException, IOException{			
@@ -209,22 +211,27 @@ public class UserInterface {
 		return contentsf;															//return all info
 	}
 	public static void page8() throws IOException{			//page 8
+		ArrayList<String> serialNoList = new ArrayList<String>();
 		System.out.println("Choose your option:");			//prints to screen
 		System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n","S.No","Name of the Book","Author","Price($)","Quantity in Store","Type");//prints with appropriate spacing
 		ArrayList<ArrayList<String>> contentsB = read4SaleTxt("Books.txt","Book");			//creates 2d arraylist to store values and uses the function to store contents of books.txt
 		for(int i=0;i<contentsB.size();i++){			//prints all the info on all the books
+			serialNoList.add(contentsB.get(i).get(0));
 			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsB.get(i).get(0),contentsB.get(i).get(1),contentsB.get(i).get(2),contentsB.get(i).get(3),contentsB.get(i).get(4),contentsB.get(i).get(5));
 		}
 		ArrayList<ArrayList<String>> contentsEB = read4SaleTxt("Ebooks.txt","eBook");		//creates 2d arraylist to store values and function to store contents
 		for(int i=0;i<contentsEB.size();i++){			//prints all info on all ebooks
 			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsEB.get(i).get(0),contentsEB.get(i).get(1),contentsEB.get(i).get(2),contentsEB.get(i).get(3),contentsEB.get(i).get(4),contentsEB.get(i).get(5));
 		}
+		System.out.println("test:"+contentsB.get(0).get(0)+contentsB.get(1).get(0));
 		Scanner a = new Scanner(System.in);
 		String p8choice1 = a.next();
+		a.close();
+		//open 
 		if(p8choice1.equals("0")){changeCurrentPage(10);}
 		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
-		else{
-			
+		else if(serialNoList.contains(p8choice1)){
+			//modify books.txt can use code from additem in shoppingcart
 		}
 	}
 	public static void page9() throws FileNotFoundException{			//page9

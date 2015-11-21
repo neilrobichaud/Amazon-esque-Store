@@ -4,10 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class ShoppingCart extends User{
@@ -28,9 +24,9 @@ public class ShoppingCart extends User{
 		return content;
 	}
 	public void addItem(Item itemname, int quantity) throws FileNotFoundException, IOException{
-		//String info = itemname.getInfo();
-		//String[] infoList=info.split(",");
-		int serialNo= Integer.parseInt(itemname.getInfo()); //Integer.parseInt(infoList[0]);
+		String info = itemname.getInfo();
+		String[] infoList=info.split(",");
+		int serialNo= Integer.parseInt(infoList[0]); //Integer.parseInt(itemname.getInfo());
 		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
 		    String line;
 		    String updatedline="";
