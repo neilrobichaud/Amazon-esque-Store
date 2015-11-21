@@ -48,7 +48,7 @@ Page5:
 	3.sign out
 	4.view previous orders
 	Choose your option
-	
+	HI MOM
 	p5choice=input
 	if p5choice=1 --> changeCurrentPage(6)
 	if p5choice=2 --> changeCurrentPage(7)
