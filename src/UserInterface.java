@@ -6,12 +6,30 @@ import java.util.*;
 public class UserInterface {
 	
 	public static void main(String args[]) throws FileNotFoundException, IOException{
-		
+		getAudioProduct();
+		getReadables();
 		page1();
-		
 	}
-	public Array readables;
-	public Array audioProducts;
+	public static ArrayList<ArrayList<String>> readables;
+	public static ArrayList<ArrayList<String>> audioProducts;
+	public static void getReadables() throws FileNotFoundException{
+		readables = read4SaleTxt("Books.txt","Book","Ebooks.txt","eBook");
+	}
+	public static void getAudioProduct() throws FileNotFoundException{
+		audioProducts = read4SaleTxt("MP3.txt","MP3","CDs.txt","CD");
+	}
+	public static void showReadables(){
+		System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n","S.No","Name of the Book","Author","Price($)","Quantity in Store","Type");//prints with appropriate spacing
+		for(int i=0;i<readables.size();i++){			//prints all the info on all the books
+			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",readables.get(i).get(0),readables.get(i).get(1),readables.get(i).get(2),readables.get(i).get(3),readables.get(i).get(4).trim(),readables.get(i).get(5));
+		}
+	}
+	public static void showAudioProducts(){
+		System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n","S.No","Name","Artist","Price($)","Quantity in Store","Type");//prints with appropriate spacing
+		for(int i=0;i<audioProducts.size();i++){			//prints all the info on all the books
+			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",audioProducts.get(i).get(0),audioProducts.get(i).get(1),audioProducts.get(i).get(2),audioProducts.get(i).get(3),audioProducts.get(i).get(4).trim(),audioProducts.get(i).get(5));
+		}
+	}
 	public static int currentPage; // the page number (p1..p10)
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, call different pages.
 		return currentPage;
@@ -29,11 +47,6 @@ public class UserInterface {
 //		if (nextPage == 10){currentPage=nextPage;page10();}
 		return nextPage;
 	}
-	public void getReadables(){} // fetches all readables from the files and places them in the readables array
-	public void getAudioProducts(){} // fetches all readables from the files and places them in the readables array
-	public void showReadables(){} //Displays all audio products for browsing.
-	public void showAudioProducts(){} //Displays all audio products for browsing.
-
 	public static  void page1() throws FileNotFoundException, IOException{	
 		File users, books, ebooks, mp3, cds; users = new File("Users.txt"); books = new File("Books.txt"); ebooks = new File("Ebooks.txt");mp3 = new File("MP3.txt"); cds = new File("CDs.txt");
 		try {
@@ -191,7 +204,7 @@ public class UserInterface {
 		
 		x.close();
 	}
-	public static ArrayList<ArrayList<String>> read4SaleTxt(String txtFile,String type) throws FileNotFoundException{
+	public static ArrayList<ArrayList<String>> read4SaleTxt(String txtFile,String type,String txtFile2,String type2) throws FileNotFoundException{
 		String token = "";															//creates empty string
 		Scanner inFile = new Scanner(new File(txtFile)).useDelimiter(", |\n");		//new scanner that stops every time it reaches ", " or a new line character
 		ArrayList<ArrayList<String>> contentsf = new ArrayList<ArrayList<String>>();//2d array list to store all contents
@@ -201,42 +214,66 @@ public class UserInterface {
 				token = inFile.next();												//grabs strings in order
 				contents.add(token);												//add each string the 1d arraylist
 			}
-			contents.add(type);														//add the type of product it is to the end of the arraylist
-//			for(int i=0;i<contents.size();i++){System.out.print(contents.get(i));}
+			contents.add(type);
 			contentsf.add(contents);												//add the 1d arraylists to the 2d arraylist to use all of them after
 		}
 		inFile.close();																//close file
-		return contentsf;															//return all info
+		Scanner inFile2 = new Scanner(new File(txtFile2)).useDelimiter(", |\n");
+		while(inFile2.hasNext()){													//while loop going through the intended file
+			ArrayList<String> contents = new ArrayList<String>();					//create 1d arraylist to store the info strings in
+			for(int i=0;i<5;i++){													//only 5 strings needed so go through exactly 5 times
+				token = inFile2.next();												//grabs strings in order
+				contents.add(token);												//add each string the 1d arraylist
+			}
+			contents.add(type2);
+			contentsf.add(contents);												//add the 1d arraylists to the 2d arraylist to use all of them after
+		}
+		inFile2.close();
+		return contentsf;														//return all info
 	}
 	public static void page8() throws IOException{			//page 8
-		System.out.println("Choose your option:");			//prints to screen
-		System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n","S.No","Name of the Book","Author","Price($)","Quantity in Store","Type");//prints with appropriate spacing
-		ArrayList<ArrayList<String>> contentsB = read4SaleTxt("Books.txt","Book");			//creates 2d arraylist to store values and uses the function to store contents of books.txt
-		for(int i=0;i<contentsB.size();i++){			//prints all the info on all the books
-			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsB.get(i).get(0),contentsB.get(i).get(1),contentsB.get(i).get(2),contentsB.get(i).get(3),contentsB.get(i).get(4),contentsB.get(i).get(5));
-		}
-		ArrayList<ArrayList<String>> contentsEB = read4SaleTxt("Ebooks.txt","eBook");		//creates 2d arraylist to store values and function to store contents
-		for(int i=0;i<contentsEB.size();i++){			//prints all info on all ebooks
-			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsEB.get(i).get(0),contentsEB.get(i).get(1),contentsEB.get(i).get(2),contentsEB.get(i).get(3),contentsEB.get(i).get(4),contentsEB.get(i).get(5));
-		}
+		System.out.print("Choose your option:");			//prints to screen
+		showReadables();
 		Scanner a = new Scanner(System.in);
 		String p8choice1 = a.next();
+		int B = -1;
 		if(p8choice1.equals("0")){changeCurrentPage(10);}
 		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
 		else{
-			
+			for(int i=0;i<readables.size();i++){
+				if(readables.get(i).get(0).equals(p8choice1)){
+					B = i;
+				}
+			}
+			if(B==-1){System.out.println("Please enter a valid input");changeCurrentPage(8);}
+			else{
+				System.out.print("Enter quantity:");
+				Scanner b = new Scanner(System.in);
+				int p8choice2 = b.nextInt();
+				if(p8choice2<Integer.parseInt(readables.get(B).get(4))&&p8choice2>0){
+					readables.get(B).set(4, Integer.toString(Integer.parseInt(readables.get(B).get(4))-p8choice2));
+				}
+			}
 		}
 	}
-	public static void page9() throws FileNotFoundException{			//page9
+	public static void page9() throws IOException{			//page9
 		System.out.println("Choose your option:");			//prints to screen
-		System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n","S.No","Name","Artist","Price($)","Quantity in Store","Type");//prints with appropriate spacing with printf
-		ArrayList<ArrayList<String>> contentsCD = read4SaleTxt("CDs.txt","CD");			//2d arraylist to store values and function to store contents of CDs.txt
-		for(int i=0;i<contentsCD.size();i++){			//prints info from cds with appropriate spacing
-			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsCD.get(i).get(0),contentsCD.get(i).get(1),contentsCD.get(i).get(2),contentsCD.get(i).get(3),contentsCD.get(i).get(4),contentsCD.get(i).get(5));
-		}
-		ArrayList<ArrayList<String>> contentsMP3 = read4SaleTxt("MP3.txt","MP3");	//2d arraylist to store values and function used to get the contents of MP3.txt
-		for(int i=0;i<contentsMP3.size();i++){			//prints info from mp3s with appropriate spacing
-			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsMP3.get(i).get(0),contentsMP3.get(i).get(1),contentsMP3.get(i).get(2),contentsMP3.get(i).get(3),contentsMP3.get(i).get(4),contentsMP3.get(i).get(5));
+		showAudioProducts();
+		Scanner a = new Scanner(System.in);
+		String p8choice1 = a.next();
+		int A = -1;
+		if(p8choice1.equals("0")){changeCurrentPage(10);}
+		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
+		else{
+			for(int i=0;i<audioProducts.size();i++){
+				if(audioProducts.get(i).get(0).equals(p8choice1)){
+					A = i;
+				}
+			}
+			if(A==-1){System.out.println("Please enter a valid input");changeCurrentPage(8);}
+			else{
+				
+			}
 		}
 	}
 }	

@@ -5,4 +5,3 @@ public abstract class Item {
 		protected int price;
 		protected int sNo;
 }
-
