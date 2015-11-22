@@ -48,7 +48,7 @@ Page5:
 	3.sign out
 	4.view previous orders
 	Choose your option
-	
+	HI MOM
 	p5choice=input
 	if p5choice=1 --> changeCurrentPage(6)
 	if p5choice=2 --> changeCurrentPage(7)
@@ -77,10 +77,14 @@ Page8:
 	print contents of ebooks.txt
 	TODO - find way to print contents of both files and assign a number to each item.
 	print choose your option
-		take inputted number, search for it in the contents of books and ebooks
+		take inputted serial number, search for it in the contents of books and ebooks
 			print "how many?"
+				check inventory that there are enough items
+				remove number of items from inventory
 				add number of items to uname1_cart
+				
 				print "x items successfully added to cart"
+				
 	
 	print press 0 to checkout or -1 to keep shopping
 	if -1 --> changeCurrentPage(6)
