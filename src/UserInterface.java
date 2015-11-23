@@ -223,16 +223,71 @@ public class UserInterface {
 		for(int i=0;i<contentsEB.size();i++){			//prints all info on all ebooks
 			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsEB.get(i).get(0),contentsEB.get(i).get(1),contentsEB.get(i).get(2),contentsEB.get(i).get(3),contentsEB.get(i).get(4),contentsEB.get(i).get(5));
 		}
-		System.out.println("test:"+contentsB.get(0).get(0)+contentsB.get(1).get(0));
+		
 		Scanner a = new Scanner(System.in);
 		String p8choice1 = a.next();
-		a.close();
+		
 		//open 
 		if(p8choice1.equals("0")){changeCurrentPage(10);}
 		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
 		else if(serialNoList.contains(p8choice1)){
+			System.out.println("How many?: "+"\n");
+			String p8choice2 = a.next();
+			try{
+				Integer.parseInt(p8choice2);
+			}
+			catch(NumberFormatException exception){
+				System.out.println("Please re-select your choice and enter a valid quantity: " + "\n");				
+				changeCurrentPage(8);
+			}
+			
+			try (BufferedReader br = new BufferedReader(new FileReader("Books.txt"))) {
+			    String line;
+			    String updatedline="";
+			    Boolean found=false;
+			    
+			    while ((line = br.readLine()) != null) {
+			    	String[] parts = line.split(", ");							//splits line into a list at comma
+			    	if (parts[0].equals(p8choice1)){				//if the first value in the list is equal to the serial number			    		
+			    		if (Integer.parseInt(parts[4]) >= Integer.parseInt(p8choice2)){
+				    		parts[4]=Integer.toString(Integer.parseInt(parts[4]) - Integer.parseInt(p8choice2));		//the quantity string is updated
+				    		for (int i=0;i<parts.length-1;i++){										//loops through parts except for last part
+				    			updatedline= updatedline + parts[i] + ", " ;							//concatenates each string to updatedline
+				    		}
+				    		updatedline=updatedline+parts[parts.length-1];							//concatenates the final value, done this way to ensure proper comma placement
+				    		
+				    		try {
+					    		BufferedReader file = new BufferedReader(new FileReader("Books.txt"));		//read cart
+					            String line1;String input = "";											//create two string variables
+					            while ((line1 = file.readLine()) != null) input += line1 + '\n';		//read contents of cart into input
+					            file.close();															//close cart
+					            input=input.replace(line, updatedline);									//update input
+					            FileOutputStream fileOut = new FileOutputStream("Books.txt");				//overwrite cart
+					            fileOut.write(input.getBytes());										//write input
+					            fileOut.close();														//close new cart file
+					    	    } catch (Exception e) {
+					    	        System.out.println("Problem reading file.");
+					    	    }
+				            found=true;
+				            break;
+			    		}
+			    		else{			    			
+			    			System.out.println("There are only "+ parts[4] + " items left please choose a lower quantity."+"\n");
+			    			changeCurrentPage(8);
+			    		}
+			    	}		    	
+			    }
+
 			//modify books.txt can use code from additem in shoppingcart
 		}
+	}
+		
+		else{
+			System.out.println("Please choose a valid option");
+			changeCurrentPage(8);
+		}
+	System.out.println("Success!");
+	changeCurrentPage(8);
 	}
 	public static void page9() throws FileNotFoundException{			//page9
 		System.out.println("Choose your option:");			//prints to screen
