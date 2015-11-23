@@ -1,9 +1,13 @@
 
 public class MP3 extends Audio{
-
-	public int getPrice() {
-		return 0;
-		// TODO Auto-generated constructor stub
+	
+	public String type;
+	public MP3(String a,String b,String c,String d,String f){
+		super(a,b,c,d);
+		this.type = f;
 	}
-
+	@Override
+	public int getPrice(){
+		return super.getPrice();
+	}
 }

@@ -1,15 +1,15 @@
 
 public class Readable extends Item{
 	protected String authorName;
-	public String getInfo(){
-		return Integer.toString(sNo);
+	public Readable(String a,String b,String c,String d){
+		super(a,b,c);
+		this.authorName = d;
 	}
-	
+	public String getInfo(String a,String b,String c,String d,String e,String f){
+		return a+", "+b+", "+c+", "+d+", "+e+", "+f;
+	}
 	@Override
 	public int getPrice(){
-		return 12;
-	
+		return price;
 	}
-	protected int price;
-	protected int sNo;
 }

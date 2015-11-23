@@ -1,10 +1,15 @@
 
 public class Book extends Readable{
+	
+	public String type;
+	
+	public Book(String a, String b, String c, String d, String f) {
+		super(a, b, c, d);
+		this.type = f;
+	}
 	@Override
 	public int getPrice(){
-		return 0;
-		// override to get the item price and
-		//add 2% (Environment Tax)
+		return price + price/50;
 	}
 
 
