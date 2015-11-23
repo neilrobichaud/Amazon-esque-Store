@@ -5,7 +5,7 @@ import java.util.*;
 
 public class UserInterface {
 	
-//	public static void main(String args[]) throws FileNotFoundException, IOException{
+//	public  void main(String args[]) throws FileNotFoundException, IOException{
 //		getArrayA();
 //		getArrayR();
 //		page1();
@@ -264,9 +264,73 @@ public class UserInterface {
 		System.out.print("Choose your option:");			//prints to screen
 		showReadables();
 		Scanner a = new Scanner(System.in);
+		ArrayList<String> serialNoList= new ArrayList<String>();
+		for(int i=0;i<arrayR.size();i++){
+			serialNoList.add(arrayR.get(i).get(0));
+		}
 		String p8choice1 = a.next();
-		
+		if(p8choice1.equals("0")){changeCurrentPage(10);}
+		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
+		else if(serialNoList.contains(p8choice1)){
+			System.out.println("How many?: "+"\n");
+			String p8choice2 = a.next();
+			try{
+				Integer.parseInt(p8choice2);
+			}
+			catch(NumberFormatException exception){
+				System.out.println("Please re-select your choice and enter a valid quantity: " + "\n");				
+				changeCurrentPage(8);
+			}
+			String txtFile;
+			if(arrayR.get(serialNoList.indexOf(p8choice1)).get(5).equals("Book")){txtFile = "Books.txt";}
+			else{txtFile = "Ebooks.txt";}
+			try (BufferedReader br = new BufferedReader(new FileReader(txtFile))) {
+			    String line;
+			    String updatedline="";
+			    Boolean found=false;
+			    
+			    while ((line = br.readLine()) != null) {
+			    	String[] parts = line.split(", ");							//splits line into a list at comma
+			    	if (parts[0].equals(p8choice1)){				//if the first value in the list is equal to the serial number			    		
+			    		if (Integer.parseInt(parts[4]) >= Integer.parseInt(p8choice2)){
+				    		parts[4]=Integer.toString(Integer.parseInt(parts[4]) - Integer.parseInt(p8choice2));		//the quantity string is updated
+				    		for (int i=0;i<parts.length-1;i++){										//loops through parts except for last part
+				    			updatedline= updatedline + parts[i] + ", " ;							//concatenates each string to updatedline
+				    		}
+				    		updatedline=updatedline+parts[parts.length-1];							//concatenates the final value, done this way to ensure proper comma placement
+				    		
+				    		try {
+					    		BufferedReader file = new BufferedReader(new FileReader(txtFile));		//read cart
+					            String line1;String input = "";											//create two string variables
+					            while ((line1 = file.readLine()) != null) input += line1 + '\n';		//read contents of cart into input
+					            file.close();															//close cart
+					            input=input.replace(line, updatedline);									//update input
+					            FileOutputStream fileOut = new FileOutputStream(txtFile);				//overwrite cart
+					            fileOut.write(input.getBytes());										//write input
+					            fileOut.close();														//close new cart file
+					    	    } catch (Exception e) {
+					    	        System.out.println("Problem reading file.");
+					    	    }
+				            found=true;
+				            break;
+			    		}
+			    		else{			    			
+			    			System.out.println("There are only "+ parts[4] + " items left please choose a lower quantity."+"\n");
+			    			changeCurrentPage(8);
+			    		}
+			    	}
+			    }
+		}
 	}
+		
+		else{
+			System.out.println("Please choose a valid option");
+			changeCurrentPage(8);
+		}
+	System.out.println("Success!");
+	changeCurrentPage(8);
+	}
+	
 	public  void page9() throws IOException{			//page9
 		System.out.println("Choose your option:");			//prints to screen
 		showAudioProducts();
