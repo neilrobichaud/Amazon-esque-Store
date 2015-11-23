@@ -301,4 +301,5 @@ public class UserInterface {
 			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",contentsMP3.get(i).get(0),contentsMP3.get(i).get(1),contentsMP3.get(i).get(2),contentsMP3.get(i).get(3),contentsMP3.get(i).get(4),contentsMP3.get(i).get(5));
 		}
 	}
+	
 }	
