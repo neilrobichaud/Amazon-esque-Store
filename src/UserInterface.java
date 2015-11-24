@@ -429,7 +429,7 @@ public class UserInterface {	//userinterface class
 		System.out.println("Billing Information:");
 		System.out.printf("%-35.35s %-15.15s %-6.6s", "Name", "Quantity", "Price");
 		System.out.println("");
-		
+		int totalprice = 0;
 		if (content.size() > 0){
 			for(int i = 0; i < content.size(); i++) {   
 			    String line = content.get(i);
@@ -437,36 +437,42 @@ public class UserInterface {	//userinterface class
 			    String itemname = parts[1];
 			    String quantity = parts[3];
 			    String serialNo = parts[0];
+			    String price = "";
 			   
 			    for(int j = 0;j<HWK4_robichne.audioProducts.size();j++){
 			    	if(HWK4_robichne.audioProducts.get(j).getSno()==Integer.parseInt(serialNo)){
-			    		String price = Integer.toString(HWK4_robichne.audioProducts.get(j).getPrice());
+			    		price = Integer.toString(HWK4_robichne.audioProducts.get(j).getPrice());
 			    		System.out.printf("%-35.35s %-15.15s %-6.6s",itemname,quantity,price);
 			    		System.out.println("");
 			    	}
 			    }
 			    for(int k = 0;k<HWK4_robichne.readables.size();k++){
 			    	if(HWK4_robichne.readables.get(k).getSno()==Integer.parseInt(serialNo)){
-			    		String price = Integer.toString(HWK4_robichne.readables.get(k).getPrice());
+			    		price = Integer.toString(HWK4_robichne.readables.get(k).getPrice());
 			    		System.out.printf("%-35.35s %-15.15s %-6.6s",itemname,quantity,price);
 			    		System.out.println("");
 			    	}
 			    }
-			    
+			    totalprice = totalprice + Integer.parseInt(quantity)*Integer.parseInt(price);
 			}
+			System.out.printf("%-45.45s %-11.11s", "" , "___________");
+			System.out.printf("%-50.50s %-6.6s","Total:", totalprice);
 			Scanner a = new Scanner(System.in);
 			String p10choice = a.next();
 			System.out.println("Are you sure you want to pay? yes or no.");
-			if(p10choice.equals("Yes||YEs||YES||YeS||yES||yEs||yeS||yes")){
+			if(p10choice.equalsIgnoreCase("Yes")){
 				System.out.println("Confirmation ID: U1000");
 				System.out.println("Items shipped to: " + ShoppingCart.getUsername());
 			}
-			else if(p10choice.equals("No||NO||no||nO")){
+			else if(p10choice.equalsIgnoreCase("No")){
 				changeCurrentPage(6);
 			}
 			else{System.out.println("Please enter a valid input");changeCurrentPage(10);}
 		}
 	}
+
+
+
 		
 }	
 

@@ -1,3 +1,11 @@
+/*
+* Name:​Neil Robichaud, Sean Mcmillan, Phillip Tran
+* MacID:​robichne, mcmillsd,trantp2 
+* Student Number:​1425566,001430814,1305071
+* Description:​This is a store that sells cds, mp3s, books and ebooks.
+*/
+
+
 import java.io.*;
 import java.util.ArrayList;
 import java.text.DateFormat;
@@ -60,7 +68,9 @@ public class ShoppingCart extends User{			//shoppingcart class
 		    	Date date = Calendar.getInstance().getTime();									//date	    	
 		    	DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");						//more date stuff
 		    	String today = formatter.format(date);											//today's date
-		    	if (firstline==false){System.out.println("");}
+		    	if (firstline==false){
+		    		output.append("\n");
+		    		}
 		    	output.append(serialNo+", "+itemname.toString()+", "+today+", "+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
 		    	//sn,name,date,quantity
 		    	output.close();																//only you can prevent a memory leak
@@ -68,7 +78,6 @@ public class ShoppingCart extends User{			//shoppingcart class
 		    
 		}
 
-		//search username_cart.txt for matching serial number
-		//if found add quantity, if not create new line with the item
+
 	}
 }

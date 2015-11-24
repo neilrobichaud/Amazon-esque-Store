@@ -1,12 +1,1 @@
-<<<<<<< HEAD
 neil
-joe
-=======
-Seanymac
->>>>>>> ff83f178e4a1b18f75bf9301a8efb2d17fb570cb
-
-goog
-Sean
-oog
-egg
-goo
