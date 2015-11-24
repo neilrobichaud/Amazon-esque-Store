@@ -1,2 +1,2 @@
-5, Harry Potter All Vol., ZZZ, 200, 5
+5, Harry Potter All Vol., ZZZ, 200, 3
 6, Twilight, DSS, 250, 3
