@@ -10,4 +10,7 @@ public abstract class Item {
 		this.name = b;																			//sets name
 		this.price = Integer.parseInt(c);														//sets price
 		}
+	public int getSno() {
+		return sNo;		
+	}
 }

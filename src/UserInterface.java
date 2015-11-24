@@ -7,8 +7,8 @@ import java.util.*;
 public class UserInterface {	//userinterface class
 	
 
-	public ArrayList<Item> audioProducts;										//arraylist that will hold the audioproduct objects
-	public ArrayList<Item> readables;											//arraylist that will hold the readables objects
+	//public static ArrayList<Item> audioProducts;										//arraylist that will hold the audioproduct objects
+	//public ArrayList<Item> readables;											//arraylist that will hold the readables objects
 	public ArrayList<ArrayList<String>> arrayR;									//2d arraylist holding info on  readables
 	public ArrayList<ArrayList<String>> arrayA;									//2d arraylist holding info on audio products
 	public void getArrayR() throws FileNotFoundException{						//creates the 2d arraylist holding readable info
@@ -29,7 +29,8 @@ public class UserInterface {	//userinterface class
 			System.out.printf("%-4.4s %-25.25s %-8.8s %-10.10s %-20.20s %-5.5s\n",arrayA.get(i).get(0),arrayA.get(i).get(1),arrayA.get(i).get(2),arrayA.get(i).get(3),arrayA.get(i).get(4).trim(),arrayA.get(i).get(5));
 		}
 	}
-	public void getAudioProducts() throws FileNotFoundException{
+	public ArrayList<Item> getAudioProducts() throws FileNotFoundException{
+		ArrayList<Item> audioProducts = new ArrayList<Item>();
 		getArrayA();
 		for(int i=0;i<arrayA.size();i++){																											//goes through the amount of audio products there are
 			if(arrayA.get(i).get(5).equals("MP3")){																									//ensures that it grabs the mp3s
@@ -41,8 +42,10 @@ public class UserInterface {	//userinterface class
 				audioProducts.add(b);																												//adds cds to the audioproducts arraylist
 			}
 		}
+		return audioProducts;
 	}
-	public void getReadables() throws FileNotFoundException{
+	public ArrayList<Item> getReadables() throws FileNotFoundException{
+		ArrayList<Item> readables = new ArrayList<Item>();
 		getArrayR();
 		for(int i=0;i<arrayR.size();i++){																											//goes through the amount of readable products there are
 			if(arrayR.get(i).get(5).equals("Book")){																								//ensures to grab the physical books
@@ -54,6 +57,7 @@ public class UserInterface {	//userinterface class
 				readables.add(d);																													//adds the eBook objects to the readables arraylist
 			}
 		}
+		return readables;
 	}
 	public  int currentPage; // the page number (p1..p10)
 	public int getCurrentPage() {//This method is for page navigation. Based on the values of the state variable, returns different pages
@@ -69,7 +73,7 @@ public class UserInterface {	//userinterface class
 		if (nextPage == 7){currentPage=nextPage;page7();}	//if x go to page x
 		if (nextPage == 8){currentPage=nextPage;page8();}	//if x go to page x
 		if (nextPage == 9){currentPage=nextPage;page9();}	//if x go to page x
-//		if (nextPage == 10){currentPage=nextPage;page10();}
+		if (nextPage == 10){currentPage=nextPage;page10();}
 		return nextPage;
 	}
 	public   void page1() throws FileNotFoundException, IOException{	
@@ -174,8 +178,8 @@ public class UserInterface {	//userinterface class
 
 		System.out.println("2.View shopping cart");					//option 1
 		System.out.println("3.Sign out");							//optioon 2
-		System.out.println("4.View previous orders");				//otpiotn 3
-		System.out.print("Choose your option:");					//choose one
+		System.out.println("4.Checkout");				//otpiotn 3
+		System.out.print("Choose your option:");					//choose one		
 		Scanner x = new Scanner(System.in);							//scanner taking input
 		String p5choice = x.next();									
 		if (p5choice.equals("1"))
@@ -186,7 +190,7 @@ public class UserInterface {	//userinterface class
 			System.out.println();									//signs out and brings to page 3
 			changeCurrentPage(1);}									//swtich page1
 		else if (p5choice.equals("4"))								//if 4
-			changeCurrentPage(11);									//MAYBE BRINGS TO PAGE 11, never happened because we didn't finish the bonus
+			changeCurrentPage(10);									//MAYBE BRINGS TO PAGE 11, never happened because we didn't finish the bonus
 		else System.out.println("Please enter a valid input");{		//if invalid input is entered 
 			changeCurrentPage(5);
 		}
@@ -422,18 +426,50 @@ public class UserInterface {	//userinterface class
 	
 	public void page10() throws FileNotFoundException, IOException{
 		ArrayList<String> content = ShoppingCart.getContent();
+		System.out.println("Billing Information:");
+		System.out.printf("%-35.35s %-15.15s %-6.6s", "Name", "Quantity", "Price");
+		System.out.println("");
 		if (content.size() > 0){
 			for(int i = 0; i < content.size(); i++) {   
 			    String line = content.get(i);
 			    String[] parts = line.split(", ");
 			    String itemname = parts[1];
 			    String quantity = parts[3];
-			    String price = itemname.getPrice();
+			    String serialNo = parts[0];
+			   
+			    for(int j = 0;j<HWK4_robichne.audioProducts.size();j++){
+			    	if(HWK4_robichne.audioProducts.get(j).getSno()==Integer.parseInt(serialNo)){
+			    		String price = Integer.toString(HWK4_robichne.audioProducts.get(j).getPrice());
+			    		System.out.printf("%-35.35s %-15.15s %-6.6s",itemname,quantity,price);
+			    		System.out.println("");
+			    	}
+			    }
+			    for(int k = 0;k<HWK4_robichne.readables.size();k++){
+			    	if(HWK4_robichne.readables.get(k).getSno()==Integer.parseInt(serialNo)){
+			    		String price = Integer.toString(HWK4_robichne.readables.get(k).getPrice());
+			    		System.out.printf("%-35.35s %-15.15s %-6.6s",itemname,quantity,price);
+			    		System.out.println("");
+			    	}
+			    }
 			    
-			} 
+			}
+			Scanner a = new Scanner(System.in);
+			String p10choice = a.next();
+			System.out.println("Are you sure you want to pay? yes or no.");
+			if(p10choice.equals("Yes||YEs||YES||YeS||yES||yEs||yeS||yes")){
+				System.out.println("Confirmation ID: U1000");
+				System.out.println("Items shipped to: " + ShoppingCart.getUsername());
+			}
+			else if(p10choice.equals("No||NO||no||nO")){
+				changeCurrentPage(6);
+			}
+			else{System.out.println("Please enter a valid input");changeCurrentPage(10);}
 		}
 	}
 		
 }	
+
+		
+	
 	
 
