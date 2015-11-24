@@ -7,10 +7,7 @@ import java.util.Date;
 
 
 public class ShoppingCart extends User{
-	public ShoppingCart(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
+
 	private static ArrayList<String> content = new ArrayList<String>(); //array of items
 	static String cartname = getUsername() + "_cart.txt";
 	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.		
@@ -23,14 +20,11 @@ public class ShoppingCart extends User{
 		}
 		return content;
 	}
-	public void addItem(Item itemname, int quantity) throws FileNotFoundException, IOException{
-		String info = itemname.getInfo();
-		String[] infoList=info.split(",");
-		int serialNo= Integer.parseInt(infoList[0]); //Integer.parseInt(itemname.getInfo());
-		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
-		    String line;
-		    String updatedline="";
-		    Boolean found=false;
+	public static void addItem(int serialNo, String itemname, int quantity) throws FileNotFoundException, IOException{				//addItem takes a serialNo and a quantity and adds that item to the users cart.
+		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {	//new filereader
+		    String line;															//line string
+		    String updatedline="";													//updated line
+		    Boolean found=false;													//does the item already exist in the cart?
 		    
 		    while ((line = br.readLine()) != null) {
 		    	String[] parts = line.split(",");							//splits line into a list at comma

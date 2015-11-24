@@ -4,7 +4,5 @@ public class User{
 	public static String getUsername(){
 		return username;
 	} 
-	public User(String name){
-		username=name;
-	}
+	
 }
