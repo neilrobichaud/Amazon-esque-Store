@@ -429,6 +429,7 @@ public class UserInterface {	//userinterface class
 		System.out.println("Billing Information:");
 		System.out.printf("%-35.35s %-15.15s %-6.6s", "Name", "Quantity", "Price");
 		System.out.println("");
+		
 		if (content.size() > 0){
 			for(int i = 0; i < content.size(); i++) {   
 			    String line = content.get(i);

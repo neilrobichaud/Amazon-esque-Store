@@ -12,7 +12,7 @@ public class ShoppingCart extends User{			//shoppingcart class
 	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.	
 		ArrayList<String> content = new ArrayList<String>(); //array of items
 		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {	//try reading cart
-		    String line;															//string line
+		    String line = "";															//string line
 		    while ((line = br.readLine()) != null) {								//if line isnt empty
 		       content.add(line);													//add it to the content
 		    }
@@ -25,8 +25,9 @@ public class ShoppingCart extends User{			//shoppingcart class
 		    String line;															//line string
 		    String updatedline="";													//updated line
 		    Boolean found=false;													//does the item already exist in the cart?
-		    
+		    Boolean firstline=true;
 		    while ((line = br.readLine()) != null) {						//if line isnt empty
+		    	firstline = false;
 		    	String[] parts = line.split(", ");							//splits line into a list at comma
 		    	if (Integer.parseInt(parts[0]) == serialNo){				//if the first value in the list is equal to the serial number
 		    		parts[3]=Integer.toString(Integer.parseInt(parts[3]) + quantity);		//the quantity string is updated
@@ -59,8 +60,8 @@ public class ShoppingCart extends User{			//shoppingcart class
 		    	Date date = Calendar.getInstance().getTime();									//date	    	
 		    	DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");						//more date stuff
 		    	String today = formatter.format(date);											//today's date
-		    	
-		    	output.append("\n"+serialNo+", "+itemname.toString()+", "+today+", "+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
+		    	if (firstline==false){System.out.println("");}
+		    	output.append(serialNo+", "+itemname.toString()+", "+today+", "+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
 		    	//sn,name,date,quantity
 		    	output.close();																//only you can prevent a memory leak
 		    }
