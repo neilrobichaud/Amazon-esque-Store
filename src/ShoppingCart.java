@@ -7,12 +7,10 @@ import java.util.Date;
 
 
 public class ShoppingCart extends User{
-
-
-
-	private static ArrayList<String> content = new ArrayList<String>(); //array of items
+	
 	static String cartname = getUsername() + "_cart.txt";
-	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.		
+	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.	
+		ArrayList<String> content = new ArrayList<String>(); //array of items
 		try (BufferedReader br = new BufferedReader(new FileReader(cartname))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {

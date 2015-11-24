@@ -227,14 +227,15 @@ public class UserInterface {
 			System.out.println("There appears to be nothing here, maybe you should buy something!");
 			changeCurrentPage(5);
 		}
-		System.out.println("Press -1 to return to previous menu");
+		System.out.println("Press any key to return to previous menu");
 		Scanner x = new Scanner(System.in);			//scanner
-		String p7choice = x.next();	
-		
+		String p7choice = x.next();			
 		if (p7choice.equals("-1"))
 			changeCurrentPage(5);
-		else System.out.println("Please enter a valid input");
-		
+		else {
+			changeCurrentPage(5);
+			
+		}
 		x.close();
 	}
 	public  ArrayList<ArrayList<String>> read4SaleTxt(String txtFile,String type,String txtFile2,String type2) throws FileNotFoundException{
@@ -345,8 +346,7 @@ public class UserInterface {
 	}
 	
 
-	public  void page9() throws IOException{																//page9
-		String username=User.getUsername();
+	public  void page9() throws IOException{																//page9		
 		System.out.println("Choose your option:");															//prints to screen
 		System.out.println("Press 0 to checkout");
 		System.out.println("Press -1 to return to the previous menu");
