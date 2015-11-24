@@ -175,8 +175,7 @@ public class UserInterface {
 		System.out.println("2.View shopping cart");
 		System.out.println("3.Sign out");
 		System.out.println("4.View previous orders");
-		System.out.print("Choose your option:");	
-		System.out.println(User.getUsername());
+		System.out.print("Choose your option:");			
 		Scanner x = new Scanner(System.in);							//scanner taking input
 		String p5choice = x.next();									
 		if (p5choice.equals("1"))
@@ -270,7 +269,7 @@ public class UserInterface {
 
 	public  void page8() throws IOException{																//page 8
 		System.out.println("Choose your option:");															//prints to screen
-		System.out.println("Press 0 to checkout");
+		System.out.println("Press 0 to checkout, or -1 to return to the previous menu"+"\n");
 		showReadables();																					//prints the readables to screen for viewing
 		Scanner a = new Scanner(System.in);																	//scanner for input
 		ArrayList<String> serialNoList= new ArrayList<String>();											//creates an arraylist for the serial numbers
@@ -305,6 +304,7 @@ public class UserInterface {
 			    		if (Integer.parseInt(parts[4]) >= Integer.parseInt(p8choice2)&&Integer.parseInt(p8choice2)>0){
 				    		parts[4]=Integer.toString(Integer.parseInt(parts[4]) - Integer.parseInt(p8choice2));		//the quantity string is updated
 				    		arrayR.get(serialNoList.indexOf(p8choice1)).set(4,Integer.toString(Integer.parseInt(arrayR.get(serialNoList.indexOf(p8choice1)).get(4))-Integer.parseInt(p8choice2)));
+				    		ShoppingCart.addItem(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(p8choice2));
 				    		for (int i=0;i<parts.length-1;i++){										//loops through parts except for last part
 				    			updatedline= updatedline + parts[i] + ", " ;							//concatenates each string to updatedline
 				    		}
