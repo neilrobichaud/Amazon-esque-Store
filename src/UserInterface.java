@@ -341,7 +341,7 @@ public class UserInterface {
 			System.out.println("Please choose a valid option");												//prints to screen
 			changeCurrentPage(8);																			//repeats page 8
 		}
-	System.out.println("Success!");																			//prints success to the screen
+	System.out.println("Item Successfully added to your Cart!");																			//prints success to the screen
 	changeCurrentPage(8);																					//repeats page to see if user wants to shop some more
 	}
 	
@@ -420,6 +420,21 @@ public class UserInterface {
 	System.out.println("Success!");																			//prints the user was successful in adding to cart
 	changeCurrentPage(9);																					//repeats page to see if the user wants to purchase anything
 	}
+	
+	public void page10() throws FileNotFoundException, IOException{
+		ArrayList<String> content = ShoppingCart.getContent();
+		if (content.size() > 0){
+			for(int i = 0; i < content.size(); i++) {   
+			    String line = content.get(i);
+			    String[] parts = line.split(", ");
+			    String itemname = parts[1];
+			    String quantity = parts[3];
+			    String price = itemname.getPrice();
+			    
+			} 
+		}
+	}
+		
 }	
-
+	
 
