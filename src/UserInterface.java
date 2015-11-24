@@ -394,9 +394,8 @@ public class UserInterface {
 			    		}
 			    	}
 			    }
+			}
 		}
-	}
-		
 		else{
 			System.out.println("Please choose a valid option");
 			changeCurrentPage(9);
@@ -404,5 +403,4 @@ public class UserInterface {
 	System.out.println("Success!");
 	changeCurrentPage(9);
 	}
-}	
-
+}
