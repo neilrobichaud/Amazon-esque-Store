@@ -4,5 +4,7 @@ public class User{
 	public static String getUsername(){
 		return username;
 	} 
-	
+	public static void setUsername(String u){
+		username= u;
+	}
 }

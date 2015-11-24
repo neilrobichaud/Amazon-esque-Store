@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class ShoppingCart extends User{
 
+
+
 	private static ArrayList<String> content = new ArrayList<String>(); //array of items
 	static String cartname = getUsername() + "_cart.txt";
 	public static ArrayList<String> getContent() throws FileNotFoundException, IOException{ //return the content of the shopping cart.		
@@ -27,11 +29,11 @@ public class ShoppingCart extends User{
 		    Boolean found=false;													//does the item already exist in the cart?
 		    
 		    while ((line = br.readLine()) != null) {
-		    	String[] parts = line.split(",");							//splits line into a list at comma
+		    	String[] parts = line.split(", ");							//splits line into a list at comma
 		    	if (Integer.parseInt(parts[0]) == serialNo){				//if the first value in the list is equal to the serial number
 		    		parts[3]=Integer.toString(Integer.parseInt(parts[3]) + quantity);		//the quantity string is updated
 		    		for (int i=0;i<parts.length-1;i++){										//loops through parts except for last part
-		    			updatedline= updatedline + parts[i] + "," ;							//concatenates each string to updatedline
+		    			updatedline= updatedline + parts[i] + ", " ;							//concatenates each string to updatedline
 		    		}
 		    		updatedline=updatedline+parts[parts.length-1];							//concatenates the final value, done this way to ensure proper comma placement
 		    		
@@ -60,7 +62,7 @@ public class ShoppingCart extends User{
 		    	DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		    	String today = formatter.format(date);
 		    	
-		    	output.append("\n"+serialNo+","+itemname.toString()+","+today+","+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
+		    	output.append("\n"+serialNo+", "+itemname.toString()+", "+today+", "+quantity);//find way to display info from serial number using getInfo method, alternate option is to use item name as input instead which would require changing of update function 
 		    	//sn,name,date,quantity
 		    	output.close();
 		    }

@@ -14,16 +14,11 @@ public class HWK4_robichne {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-<<<<<<< HEAD
+
 		UserInterface ui = new UserInterface();																						//creates a new instance of the userinterface
 		ui.getArrayA();																												//makes sure the arrays are created
 		ui.getArrayR();
 		ui.page1();																													//begin going through the pages
-=======
-		UserInterface ui = new UserInterface();
-		ui.getArrayA();
-		ui.getArrayR();
-		ui.page1();
->>>>>>> origin/gitlabhwk4
+
 	}
 }

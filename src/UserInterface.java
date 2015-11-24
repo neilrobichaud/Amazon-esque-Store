@@ -138,6 +138,8 @@ public class UserInterface {
 				writer.close();
 			}
 			System.out.println("Hello " + p3choice);	//prints to screen			
+			User myuser= new User();
+			myuser.setUsername(p3choice);
 			changeCurrentPage(5);						//to page 5
 		}
 		else{											//if not in file
@@ -166,17 +168,15 @@ public class UserInterface {
 	}
 
 	public  void page5() throws FileNotFoundException, IOException{
-<<<<<<< HEAD
+
 		System.out.println("\n"+"\n");								//for spacing of pages
 		System.out.println("1.View items by category");				//options
-=======
-		System.out.println("\n"+"\n");
-		System.out.println("1.View items by category");
->>>>>>> origin/gitlabhwk4
+
 		System.out.println("2.View shopping cart");
 		System.out.println("3.Sign out");
 		System.out.println("4.View previous orders");
-		System.out.print("Choose your option:");			
+		System.out.print("Choose your option:");	
+		System.out.println(User.getUsername());
 		Scanner x = new Scanner(System.in);							//scanner taking input
 		String p5choice = x.next();									
 		if (p5choice.equals("1"))
@@ -194,13 +194,11 @@ public class UserInterface {
 		x.close();
 	}
 	public  void page6() throws FileNotFoundException, IOException{	
-<<<<<<< HEAD
+
 		System.out.println("\n"+"\n");								//spacing for format
 		System.out.println("1. Readables");							//prints options to screen
-=======
-		System.out.println("\n"+"\n");
-		System.out.println("1. Readables");
->>>>>>> origin/gitlabhwk4
+
+
 		System.out.println("2. Audio");
 		System.out.println("Choose your option");
 		System.out.println("Press -1 to return to previous menu");
@@ -226,9 +224,10 @@ public class UserInterface {
 			    System.out.println(content.get(i));
 			} 
 		}
-		else
+		else{
 			System.out.println("There appears to be nothing here, maybe you should buy something!");
-		
+			changeCurrentPage(5);
+		}
 		System.out.println("Press -1 to return to previous menu");
 		Scanner x = new Scanner(System.in);			//scanner
 		String p7choice = x.next();	
@@ -258,11 +257,9 @@ public class UserInterface {
 			ArrayList<String> contents = new ArrayList<String>();					//create 1d arraylist to store the info strings in
 			for(int i=0;i<5;i++){													//only 5 strings needed so go through exactly 5 times
 				token = inFile2.next();												//grabs strings in order
-<<<<<<< HEAD
+
 				contents.add(token.trim());											//add each string the 1d arraylist
-=======
-				contents.add(token.trim());												//add each string the 1d arraylist
->>>>>>> origin/gitlabhwk4
+
 			}
 			contents.add(type2);
 			contentsf.add(contents);												//add the 1d arraylists to the 2d arraylist to use all of them after
@@ -270,7 +267,7 @@ public class UserInterface {
 		inFile2.close();
 		return contentsf;															//return all info
 	}
-<<<<<<< HEAD
+
 	public  void page8() throws IOException{																//page 8
 		System.out.println("Choose your option:");															//prints to screen
 		System.out.println("Press 0 to checkout");
@@ -285,21 +282,7 @@ public class UserInterface {
 		else if(p8choice1.equals("-1")){changeCurrentPage(6);}												//-1 brings the user back to previous page
 		else if(serialNoList.contains(p8choice1)){															//checks if what the user entered is a valid serial number
 			System.out.println("How many?: ");																//asks this on the screen
-=======
-	public  void page8() throws IOException{			//page 8
-		System.out.println("Choose your option:");			//prints to screen
-		showReadables();
-		Scanner a = new Scanner(System.in);
-		ArrayList<String> serialNoList= new ArrayList<String>();
-		for(int i=0;i<arrayR.size();i++){
-			serialNoList.add(arrayR.get(i).get(0));
-		}
-		String p8choice1 = a.next();
-		if(p8choice1.equals("0")){changeCurrentPage(10);}
-		else if(p8choice1.equals("-1")){changeCurrentPage(6);}
-		else if(serialNoList.contains(p8choice1)){
-			System.out.println("How many?: ");
->>>>>>> origin/gitlabhwk4
+
 			String p8choice2 = a.next();
 			try{
 				Integer.parseInt(p8choice2);																//checks if it is actually a proper entry
@@ -343,11 +326,9 @@ public class UserInterface {
 				            break;
 			    		}
 			    		else{			    			
-<<<<<<< HEAD
+
 			    			System.out.println("There are "+ parts[4] + " items left please choose your option again with a smaller quantity."+"\n");
-=======
-			    			System.out.println("There are "+ parts[4] + " items left please choose a proper quantity."+"\n");
->>>>>>> origin/gitlabhwk4
+
 			    			changeCurrentPage(8);
 			    		}
 			    	}
@@ -363,7 +344,7 @@ public class UserInterface {
 	changeCurrentPage(8);																					//repeats page to see if user wants to shop some more
 	}
 	
-<<<<<<< HEAD
+
 	public  void page9() throws IOException{																//page9
 		String username=User.getUsername();
 		System.out.println("Choose your option:");															//prints to screen
@@ -387,69 +368,7 @@ public class UserInterface {
 			catch(NumberFormatException exception){
 				System.out.println("Please re-select your choice and enter a valid quantity: " + "\n");		//prints to screen
 				changeCurrentPage(9);																		//repeates page
-=======
-	public  void page9() throws IOException{			//page9
-		System.out.println("Choose your option:");			//prints to screen
-		showAudioProducts();
-		Scanner a = new Scanner(System.in);
-		ArrayList<String> serialNoList= new ArrayList<String>();
-		for(int i=0;i<arrayA.size();i++){
-			serialNoList.add(arrayA.get(i).get(0));
-		}
-		String p9choice1 = a.next();
-		if(p9choice1.equals("0")){changeCurrentPage(10);}
-		else if(p9choice1.equals("-1")){changeCurrentPage(6);}
-		else if(serialNoList.contains(p9choice1)){
-			System.out.println("How many?: ");
-			String p9choice2 = a.next();
-			try{
-				Integer.parseInt(p9choice2);
-			}
-			catch(NumberFormatException exception){
-				System.out.println("Please re-select your choice and enter a valid quantity: " + "\n");				
-				changeCurrentPage(9);
-			}
-			String txtFile;
-			if(arrayA.get(serialNoList.indexOf(p9choice1)).get(5).equals("MP3")){txtFile = "MP3.txt";}
-			else{txtFile = "CDs.txt";}
-			try (BufferedReader br = new BufferedReader(new FileReader(txtFile))) {
-			    String line;
-			    String updatedline="";
-			    Boolean found=false;
-			    
-			    while ((line = br.readLine()) != null) {
-			    	String[] parts = line.split(", ");							//splits line into a list at comma
-			    	if (parts[0].equals(p9choice1)){				//if the first value in the list is equal to the serial number			    		
-			    		if (Integer.parseInt(parts[4]) >= Integer.parseInt(p9choice2)&&Integer.parseInt(p9choice2)>0){
-				    		parts[4]=Integer.toString(Integer.parseInt(parts[4]) - Integer.parseInt(p9choice2));		//the quantity string is updated
-				    		arrayA.get(serialNoList.indexOf(p9choice1)).set(4,Integer.toString(Integer.parseInt(arrayA.get(serialNoList.indexOf(p9choice1)).get(4))-Integer.parseInt(p9choice2)));
-				    		for (int i=0;i<parts.length-1;i++){										//loops through parts except for last part
-				    			updatedline= updatedline + parts[i] + ", " ;							//concatenates each string to updatedline
-				    		}
-				    		updatedline=updatedline+parts[parts.length-1];							//concatenates the final value, done this way to ensure proper comma placement
-				    		
-				    		try {
-					    		BufferedReader file = new BufferedReader(new FileReader(txtFile));		//read cart
-					            String line1;String input = "";											//create two string variables
-					            while ((line1 = file.readLine()) != null) input += line1 + '\n';		//read contents of cart into input
-					            file.close();															//close cart
-					            input=input.replace(line, updatedline);									//update input
-					            FileOutputStream fileOut = new FileOutputStream(txtFile);				//overwrite cart
-					            fileOut.write(input.getBytes());										//write input
-					            fileOut.close();														//close new cart file
-					    	    } catch (Exception e) {
-					    	        System.out.println("Problem reading file.");
-					    	    }
-				            found=true;
-				            break;
-			    		}
-			    		else{			    			
-			    			System.out.println("There are "+ parts[4] + " items left please choose a proper quantity."+"\n");
-			    			changeCurrentPage(9);
-			    		}
-			    	}
-			    }
->>>>>>> origin/gitlabhwk4
+
 			}
 			String txtFile;																					//creates a string variable to hold the name of whichever textfile we are accessing
 			if(arrayA.get(serialNoList.indexOf(p9choice1)).get(5).equals("MP3")){txtFile = "MP3.txt";}		//assigns the proper textfile to the variable depending on what the user buys
@@ -492,16 +411,8 @@ public class UserInterface {
 			    		}
 			    	}
 			    }
-		}
-		else{
-			System.out.println("Please choose a valid option");
-			changeCurrentPage(9);
-		}
-	System.out.println("Success!");
-	changeCurrentPage(9);
-	}
-<<<<<<< HEAD
-		
+			}
+		}		
 		else{
 			System.out.println("Please choose a valid option");												//prints to screen
 			changeCurrentPage(9);																			//repeates page 9
@@ -512,6 +423,3 @@ public class UserInterface {
 }	
 
 
-=======
-}
->>>>>>> origin/gitlabhwk4
